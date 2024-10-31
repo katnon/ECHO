@@ -1,4 +1,3 @@
-package chatbottest;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 
 public class GPTChatbot {
     private static final String API_URL = "https://api.openai.com/v1/chat/completions";
-    private static final String API_KEY = "FAKEKEY";
+    private static String API_KEY = "";
 
     // 각 챗봇의 프롬프트
     private static final String[] botPrompts = {
@@ -25,6 +24,16 @@ public class GPTChatbot {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String userInput = "";
+
+        // 건호가 수정(추가)한 부분
+        API_KEY = System.getenv("OPENAI_API_KEY");
+        if (API_KEY == ""){
+            System.out.println("API KEY를 찾을 수 없습니다. 환경변수를 확인해주세요.");
+            return;
+        }
+
+        System.out.println("API KEY를 성공적으로 로드 했습니다.");
+        //여기까지
 
         while (true) {
             printBotSelectionMenu();
